@@ -5,6 +5,7 @@ import { Footer } from '../../../shared/components/footer/footer';
 import { SearchInput } from '../../components/search-input/search-input';
 import { CountryList } from '../../components/country-list/country-list';
 import { FormsModule } from '@angular/forms';
+import { Country } from '../../../shared/interfaces';
 
 @Component({
   selector: 'app-by-capital-page',
@@ -14,7 +15,7 @@ import { FormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ByCapitalPage {
-  countries: any[] = [];
+  countries: Country[] = [];
 
   constructor(
     private countryService: CountryService,

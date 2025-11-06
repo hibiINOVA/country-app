@@ -1,18 +1,22 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { NgFor } from '@angular/common';
 import { CountryService } from '../../../shared/services/country';
 import { Footer } from '../../../shared/components/footer/footer';
 import { CountryList } from '../../components/country-list/country-list';
 import { FormsModule } from '@angular/forms';
+import { Country } from '../../../shared/interfaces';
 
 @Component({
   selector: 'app-by-region-page',
-  imports: [Footer, CountryList, FormsModule, HttpClientModule],
+  imports: [Footer, CountryList, FormsModule, HttpClientModule, NgFor],
   templateUrl: './by-region-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ByRegionPage implements OnInit {
-  countries: any[] = [];
+  countries: Country[] = [];
+  regions = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
+  selectedRegion = 'Europe';
 
   constructor(
     private countryService: CountryService,
@@ -20,19 +24,16 @@ export class ByRegionPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('🚀 Componente ByRegionPage inicializado');
-
-    this.onSearch('europe');
+    this.onSearch('Europe');
   }
 
   onSearch(region: string) {
-    console.log('🌎 Buscando región:', region);
+    this.selectedRegion = region;
+    console.log('🌍 Buscando región:', region);
 
     this.countryService.searchByRegion(region).subscribe({
       next: (data) => {
-        console.log('✅ Respuesta de la API:', data);
         this.countries = data;
-
         this.cdr.markForCheck();
       },
       error: () => {
