@@ -8,6 +8,10 @@ const API_URL = 'https://restcountries.com/v3.1';
   providedIn: 'root'
 })
 export class CountryService {
+
+  // ⭐ Estado global: última región seleccionada
+  lastRegion: string = '';
+
   constructor(private http: HttpClient) {}
 
   searchCountry(country: string) {
@@ -22,8 +26,11 @@ export class CountryService {
     return this.http.get<any[]>(url);
   }
 
-
   searchByRegion(region: string) {
+
+    // 🔥 Guardamos la última región buscada
+    this.lastRegion = region;
+
     const url = `${API_URL}/region/${encodeURIComponent(region)}`;
     console.log('🌍 Fetching URL:', url);
     return this.http.get<any[]>(url);

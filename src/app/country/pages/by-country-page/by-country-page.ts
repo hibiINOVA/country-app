@@ -18,21 +18,22 @@ export class ByCountryPage {
   constructor(private countryService: CountryService) {}
 
   onSearch(term: string) {
-    console.log('🔍 Buscando país:', term);
+  console.log('🔍 Buscando país:', term);
 
-    this.countryService.searchCountry(term).subscribe({
-      next: (data) => {
-        console.log('✅ Respuesta de la API:', data);
-        this.countries = data;
-      },
-      error: (error) => {
-        console.error('❌ Error al obtener países:', error);
-        this.countries = [];
-      },
-      complete: () => {
-        console.log('✅ Búsqueda completada');
-      },
-    });
-  }
+  this.countryService.searchCountry(term).subscribe({
+    next: (data) => {
+      // Si hay región guardada, filtramos
+      if (this.countryService.lastRegion) {
+        data = data.filter(country =>
+          country.region.toLowerCase() === this.countryService.lastRegion.toLowerCase()
+        );
+      }
+
+      this.countries = data;
+    },
+    error: () => (this.countries = []),
+  });
+}
+
 
 }

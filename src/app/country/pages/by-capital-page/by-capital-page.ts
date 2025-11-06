@@ -18,24 +18,26 @@ export class ByCapitalPage {
 
   constructor(
     private countryService: CountryService,
-    private cdr: ChangeDetectorRef // 👈 lo agregamos
+    private cdr: ChangeDetectorRef
   ) {}
 
   onSearch(term: string) {
-    console.log('🔍 Buscando capital:', term);
+  const cleanTerm = term.trim();
+  console.log('🔍 Buscando capital:', cleanTerm);
 
-    this.countryService.searchByCapital(term).subscribe({
-      next: (data) => {
-        console.log('✅ Respuesta de la API:', data);
-        this.countries = data;
-        this.cdr.markForCheck(); // 👈 fuerza que Angular actualice la vista
-      },
-      error: (error) => {
-        console.error('❌ Error al obtener países:', error);
-        this.countries = [];
-        this.cdr.markForCheck();
-      },
-      complete: () => console.log('✅ Búsqueda completada'),
-    });
-  }
+  this.countryService.searchByCapital(cleanTerm).subscribe({
+    next: (data) => {
+      console.log('✅ Respuesta de la API:', data);
+      this.countries = data;
+      this.cdr.markForCheck(); 
+    },
+    error: (error) => {
+      console.error('❌ Error al obtener países:', error);
+      this.countries = [];
+      this.cdr.markForCheck();
+    },
+    complete: () => console.log('🏁 Búsqueda completada'),
+  });
+}
+
 }
