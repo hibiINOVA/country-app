@@ -1,9 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-country-list',
-  imports: [],
+  imports: [NgFor],
   templateUrl: './country-list.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CountryList { }
+export class CountryList {
+  @Input() countries: any[] = [];
+}

@@ -1,32 +1,22 @@
-<div class="overflow-x-auto">
-        <table class="table">
-            <thead>
-            <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Job</th>
-                <th>Favorite Color</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>Blue</td>
-            </tr>
-            <tr>
-                <th>2</th>
-                <td>Hart Hagerty</td>
-                <td>Desktop Support Technician</td>
-                <td>Purple</td>
-            </tr>
-            <tr>
-                <th>3</th>
-                <td>Brice Swyre</td>
-                <td>Tax Accountant</td>
-                <td>Red</td>
-            </tr>
-            </tbody>
-        </table>
-        </div>
+<div class="overflow-x-auto mt-4">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Bandera</th>
+        <th>Nombre</th>
+        <th>Capital</th>
+        <th>Región</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of countries; let i = index">
+        <th>{{ i + 1 }}</th>
+        <td><img [src]="c.flags?.png" alt="flag" class="w-8 h-5 rounded-sm" /></td>
+        <td>{{ c.name.common }}</td>
+        <td>{{ c.capital?.[0] }}</td>
+        <td>{{ c.region }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
