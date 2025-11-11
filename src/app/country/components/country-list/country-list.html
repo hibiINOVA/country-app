@@ -10,13 +10,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let c of countries; let i = index">
-        <th>{{ i + 1 }}</th>
-        <td><img [src]="c.flags?.png" alt="flag" class="w-8 h-5 rounded-sm" /></td>
-        <td>{{ c.name.common }}</td>
-        <td>{{ c.capital?.[0] }}</td>
-        <td>{{ c.region }}</td>
-      </tr>
+      @for (country of countries(); track country.cca2; let index = $index) {
+        <tr>
+          <td> {{index + 1}}</td>
+          <td>
+            <img src="{{country.flags.svg}}" alt="{{country.name.common}} flag" width="50" />
+          </td>
+          <td> {{country.name.common}} </td>
+          <td> {{country.capital}} </td>
+          <td> {{country.region}} </td>
+
+        </tr>
+      }
     </tbody>
   </table>
 </div>
