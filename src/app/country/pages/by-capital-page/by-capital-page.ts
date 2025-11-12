@@ -5,7 +5,7 @@ import { Footer } from '../../../shared/components/footer/footer';
 import { SearchInput } from '../../components/search-input/search-input';
 import { CountryList } from '../../components/country-list/country-list';
 import { FormsModule } from '@angular/forms';
-import { Country } from '../../../shared/interfaces';
+import { Country } from '../../../shared/interfaces/country.interface';
 
 @Component({
   selector: 'app-by-capital-page',

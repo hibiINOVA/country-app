@@ -5,7 +5,7 @@ import { CountryService } from '../../../shared/services/country';
 import { Footer } from '../../../shared/components/footer/footer';
 import { CountryList } from '../../components/country-list/country-list';
 import { FormsModule } from '@angular/forms';
-import { Country } from '../../../shared/interfaces';
+import { Country } from '../../../shared/interfaces/country.interface';
 
 @Component({
   selector: 'app-by-region-page',

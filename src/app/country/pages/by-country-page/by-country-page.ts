@@ -5,7 +5,7 @@ import { Footer } from '../../../shared/components/footer/footer';
 import { SearchInput } from '../../components/search-input/search-input';
 import { CountryList } from '../../components/country-list/country-list';
 import { FormsModule } from '@angular/forms';
-import { Country } from '../../../shared/interfaces';
+import { Country } from '../../../shared/interfaces/country.interface';
 
 @Component({
   selector: 'app-by-country-page',
@@ -25,21 +25,17 @@ export class ByCountryPage {
     console.log('🔍 Buscando país:', term);
 
     this.countryService.searchCountry(term).subscribe({
-      next: (data) => {
-        // Si hay región guardada, filtramos
-        if (this.countryService.lastRegion) {
-          data = data.filter(country =>
-            country.region.toLowerCase() === this.countryService.lastRegion.toLowerCase()
-          );
-        }
-
-        this.countries = data;
-        this.cdr.markForCheck(); // ✅ Notifica a Angular que detecte cambios
-      },
-      error: () => {
-        this.countries = [];
-        this.cdr.markForCheck(); // ✅ También en caso de error
-      },
+    next: (data) => {
+      console.log('✅ Respuesta de la API:', data);
+      this.countries = data;
+      this.cdr.markForCheck(); 
+    },
+    error: (error) => {
+      console.error('❌ Error al obtener países:', error);
+      this.countries = [];
+      this.cdr.markForCheck();
+    },
+    complete: () => console.log('🏁 Búsqueda completada'),
     });
   }
 }

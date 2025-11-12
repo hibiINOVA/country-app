@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Country } from '../../../shared/interfaces';
+import { Country } from '../../../shared/interfaces/country.interface';
 
 @Component({
   selector: 'app-country-list',
